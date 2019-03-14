@@ -18,7 +18,7 @@ gradeChoices = [        ('1º Ano','1º Ano'),
                         ('3º Ensino Med.','3º Ensino Med.')]
 
 
-
+@app.route("/", methods=["GET","POST"])
 @app.route("/home", methods=["GET","POST"])
 def home():
     cnt = Contact()
