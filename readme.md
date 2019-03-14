@@ -1,6 +1,6 @@
 # UTFACE_web Project
 
-The UTFACE_web is a social project. We aim to help children, teenagers and young adults
+The UTFACE_web is a social project. We're from brazil, [UENP](uenp.edu.br).  We aim to help children, teenagers and young adults
 to make better use of technology in the learning/school context. We try to achieve that by gathering and reading multiple papers about learning tools, then we try to translate the rather complex scientific language into a simpler student's language.
 
 ## The website
