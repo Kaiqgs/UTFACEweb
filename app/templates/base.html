@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>UTFACE_web</title>
+  <link href="https://fonts.googleapis.com/css?family=Lato|Montserrat" rel="stylesheet">
+  <link rel="icon" href="{{ url_for('static', filename='img/icon.png') }}"
+
+
+  <!-- Bootstrap core CSS -->
+  <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
+  <!-- Plugin CSS -->
+  <link href="{{ url_for('static', filename='vendor/magnific-popup/magnific-popup.css') }}" rel="stylesheet" type="text/css">
+
+  <!-- Custom styles for this template -->
+  <link href="{{ url_for('static', filename='css/freelancer.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/sidebar.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/utface.css') }}" rel="stylesheet">
+</head>
+
+<body>
+  <div class="wrapper">
+    <!-- Sidebar Holder -->
+    <nav id="sidebar" class="{{ 'active' if notActive else '' }}  fixed-menu">
+      <div class="sidebar-header text-uppercase">
+        <h3>Guia de Página</h3>
+      </div>
+      <ul class="list-unstyled components" id="pageGuide">
+      </ul>
+    </nav>
+
+    <div id="content">
+
+
+      <nav class="navbar navbar-expand-lg bg-secondary navbar-light sticky-top fixed-top text-uppercase" id="mainNav">
+        <div class="container navbar-header">
+          <button type="button" id="sidebarCollapse" class="navbar-btn js-scroll-trigger {{'active' if notActive else ''}}">
+              <span></span>
+              <span></span>
+              <span></span>
+          </button>
+          <a class="navbar-brand" href="#page-top">UTFACE_web</a>
+
+          <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                      Menu
+                      <i class="fas fa-bars"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item mx-0 mx-lg-1">
+                <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{url_for('home')}}">Inicio</a>
+              </li>
+              <li class="nav-item mx-0 mx-lg-1">
+                <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{url_for('consumo')}}">Consumo</a>
+              </li>
+              <li class="nav-item mx-0 mx-lg-1">
+                <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{url_for('criacao') }}">Criação</a>
+              </li>
+              <li class="nav-item mx-0 mx-lg-1">
+                <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{url_for('praticas')}}">Boas Práticas</a>
+              </li>
+              <li class="nav-item mx-0 mx-lg-1">
+                <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" data-toggle="modal" href="#exampleModal"><i class="fas fa-phone-square"></i></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <div class="modal fade text-dark" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3 class="modal-title" id="exampleModalLabel">Fale Conosco</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form method="POST">
+              <div class="modal-body h4">
+                {{form.csrf_token}}
+                <div class="form-group">
+                  <label for="emailInput">Qual o seu email?</label>
+                  {{form.email(id='emailInput',class='form-control', placeholder='exemplo@email.com')}}
+                </div>
+                <div class="form-group">
+                  <label for="nameInput">Qual o seu nome?</label>
+                  {{form.name(id='nameInput',class='form-control', placeholder='João Exemplo da Silva')}}
+                </div>
+                <div class="form-group">
+                  <label for="ageInput">Qual sua idade?</label>
+                  {{form.age(id='ageInput',class='form-control', step='1', type='number', placeholder='10-18?')}}
+                </div>
+                <div class="form-group">
+                  <label for="gradeSelect">Qual a sua série?</label>
+                  {{form.grade(id='gradeSelect',class='form-control',placeholder='Pode escrever aqui o que quiser nos dizer!')}}
+                </div>
+                <div class="form-group">
+                  <label for="messageTextArea">Nos diga ou pergunte qualquer coisa!</label>
+                  {{form.message(id='messageTextArea',class='form-control')}}
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <input  class="btn btn-primary" type="submit" value="Enviar">
+              </div>
+              {{form.source}}
+            </form>
+
+          </div>
+        </div>
+      </div>
+
+      {% block content %}
+      {% endblock %}
+    </div>
+  </div>
+
+  <!-- jQuery CDN - Slim version (=without AJAX) -->
+  <script src="{{ url_for('static',filename='vendor/jquery/jquery.slim.min.js') }}"></script>
+  <!-- Popper.JS -->
+  <script src="{{ url_for('static',filename='js/popper.min.js') }}"></script>
+  <!-- Bootstrap JS -->
+  <script src="{{ url_for('static',filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+  <script src="{{ url_for('static',filename='js/utface.js') }}"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('#sidebarCollapse').on('click', function() {
+        $('#sidebar').toggleClass('active');
+        $(this).toggleClass('active');
+      });
+    });
+  </script>
+</body>
+
+
+</html>

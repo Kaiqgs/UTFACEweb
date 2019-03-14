@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Header -->
+<header class="masthead bg-primary text-white text-center mb-5 img-fluid responsive-bg-image" style="background-image:url({{url_for('static',filename='img/create.jpg')}});" >
+    <h1 class="text-uppercase mb-0 text-shadow">Ferramentas de Criação</h1>
+    <h2 class="font-weight-light mb-0 text-shadow">Qual a melhor ferramenta para aquele seu trabalho escolar?</h2>
+</header>
+
+<div class="text-dark mb-3">
+ <section>
+        <div class="lead">
+          <div class="d-flex  title-transition">
+            <h3 class="text-uppercase mr-auto" id="google-docs-t">1.0 - Google Docs</h3>
+            <a class="nav-link " data-toggle="modal" href="#exampleModal"><i class="fas fa-phone-square"></i></a>
+          </div>
+          <p class="text-justify paragraph-block">O Google Docs é um pacote de ferramentas que tem diversas funcionalidade como corretor ortográfico, editor de texto e gráficos online e de acesso gratuito, tudo o que é necessário para sua utilização é um dispositivo como um celular ou um computador com acesso à internet para utilizar. É possível com esta ferramenta a edição de documentos microsoft ou a criação de novos além de contar com funcionalidades úteis como o compartilhamento de arquivos, trabalhos colaborativos.</p>
+          <p class="text-justify paragraph-block">Nós do UTFACE_web disponibilizamos um modelo para você poder utilizar ao máximo a poderosa ferramenta de apresentação e de edição de textos do Google!</p>
+        </div>
+        <hr width="60%">
+  </section>
+  <section>
+    <div class="subtitle-transition">
+    <h3 class="text-uppercase" id="slides-google">1.1 - Slides Google</h3>
+    </div>
+        <div class="lead">
+          <p class="text-justify paragraph-block"> Google apresentações é uma poderosa ferramenta que disponibiliza diversas maneiras  para que seja feita uma apresentação de qualidade de forma rápida, prática e simples sem a necessidade de que você precise instalar programas e assim como o google documentos, há funcionalidades como compartilhamento de arquivos, trabalhos colaborativos.</p>
+        </div>
+          <hr width="60%">
+  </section>
+</div>
+
+<!-- <br><a  class="btn btn-link" href="https://docs.google.com/document/d/1Xa1g6EpfCOxGba3R8_PxllIuu_eWoDneF10y7BnTYcI/edit?usp=sharing">Link modelo Google Docs</a><br><a class="btn btn-link" href="https://drive.google.com/open?id=1Tz74pRiUMJ3X6OtPfgEhEBeVb_aaI1T2">Link modelo apresentação</a> -->
+<div class="text-dark">
+ <section class="text-dark">
+        <div class="lead mx-3 pb-5">
+          <div class="d-flex  title-transition">
+            <h3 class="text-uppercase mr-auto" id="youtube-t">1.0 - Youtube</h3>
+            <a class="nav-link " data-toggle="modal" href="#exampleModal"><i class="fas fa-phone-square"></i></a>
+          </div>
+          <p class="text-justify paragraph-block">O youtube para criadores tem se mostrado uma ferramenta poderosíssima!</p>
+        </div>
+  </section>
+</div>
+<br><br><br>
+{% endblock %}

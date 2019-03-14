@@ -1,0 +1,37 @@
+h1,h2,h3,h4,h5,h6,p,a{
+  /*font-family: sans-serif;*/
+}
+
+.title-transition{
+  text-align: left;
+  margin: 20px 15%;
+}
+
+.subtitle-transition{
+  text-align: left;
+  margin: 20px 15%;
+}
+
+.paragraph-block{
+  margin: 5px 20%;
+  font-size: 1.3rem;
+  text-indent: 3rem;
+}
+
+.responsive-bg-image{
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.fixed-menu{
+  overflow: hidden;
+  position: fixed;
+  top: 0%;
+  border-radius:2px;
+}
+
+.text-shadow{
+  text-shadow: 2px 2px 5px #000000;
+}

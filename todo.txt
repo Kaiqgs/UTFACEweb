@@ -1,0 +1,1 @@
+#Toggle modal por javascript, alterando o Hidden input pro valor da leitura atual;
