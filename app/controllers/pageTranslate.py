@@ -40,14 +40,21 @@ class PageTranslator:
                                 "#imgpath": lambda x : self.header_imgpath.format(self.cleanToken(x)),
                                 "#title": lambda x : self.header_title.format(self.cleanToken(x)),
                                 "#": self.__h,
-                                "**_else_**": lambda x : '<p class="text-justify paragraph-block">{}</p>'.format(self.cleanToken(x)),
+                                "**_else_**": self._else,
                             }
         self.shouldEndSection = False
+
+    def _else(self, x):
+        if "<br>" in x:
+            return '<p class="text-justify paragraph-block">{}</p><br>'.format(self.cleanToken(x))
+        else:
+            return '<p class="text-justify paragraph-block">{}</p>'.format(self.cleanToken(x))
+
     @property
     def topic_div(self):
         return self.topic_format.format(top=self.topic_counter, sub=self.sub_counter)
 
-    def cleanToken(self, t): return t.strip(" #")
+    def cleanToken(self, t): return t.strip(" #").replace("<br>","")
 
     def incrementTopic(self, count):
         newSubTopic = count == 1
@@ -62,10 +69,11 @@ class PageTranslator:
         if(count == 0): return ""
         self.incrementTopic(count)
         
-        id_name = "-".join(unidecode.unidecode(z).lower().split() + ["t"])
+        id_name = "".join( c for c in unidecode.unidecode(z.lower()) if c.isalpha() ) + "-t"
         #z = self.topic_div + z
         
-        extra = ('<hr width="60%">\n</section>\n' * (self.sub_counter > 0 or self.topic_counter > 1 )) +('</div>\n' * (count == 1 and self.topic_counter > 1)) + ("<div>\n" * (count == 1)) + "<section>\n"
+        extra = ('<hr width="60%">\n</section>\n' * (self.sub_counter > 0 or self.topic_counter > 1 )) +('</div>\n' * (count == 1 and self.topic_counter > 1)) + ('<div class="text-body">\n' * (count == 1)) + \
+        '<section style="margin: 20px {v_margin}%; padding: 5px 0px 0px {v_margin}%;">\n'.format(v_margin=(4 * count) - 4)
         
         isMainTopic = count == 1
         if isMainTopic:
@@ -79,10 +87,10 @@ class PageTranslator:
         else:
             code = \
 '''
-<div class="subtitle-transition" style="margin: 20px {v_margin}%">
+<div class="subtitle-transition">
 <h{c} class="text-uppercase" id="{id}">{}</h{c}>
 </div>\n
-'''.format(z,id=id_name,c=2 + count, v_margin=14 + 2 * count)
+'''.format(z,id=id_name,c=2 + count//2)
         h = extra + code
 
         self.shouldEndSection = True
@@ -101,7 +109,6 @@ class PageTranslator:
                     return v(z)
                 else:
                     return v(z[len(k):])
-
         return self.__hashdict["**_else_**"](z)
 
     def translate(self):
