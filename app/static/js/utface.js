@@ -5,7 +5,6 @@ arrangeGuide = function(){
   for(let i = 0; i < titles.length; ++i){
       var li = document.createElement("li");
       var a = document.createElement("a");
-      console.log(titles[i].id);
       a.href = "#" + titles[i].id;
       a.innerHTML = titles[i].getElementsByTagName("h3")[0].innerText;
        li.appendChild(a);

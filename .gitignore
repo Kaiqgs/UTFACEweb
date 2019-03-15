@@ -1,1 +1,6 @@
 utface/
+.vscode/
+__pycache__/
+app/__pycache__/
+app/controllers/__pycache__/
+app/models/__pycache__/

@@ -63,21 +63,26 @@ class PageTranslator:
         self.incrementTopic(count)
         
         id_name = "-".join(unidecode.unidecode(z).lower().split() + ["t"])
-        z = self.topic_div + z
+        #z = self.topic_div + z
         
         extra = ('<hr width="60%">\n</section>\n' * (self.sub_counter > 0 or self.topic_counter > 1 )) +('</div>\n' * (count == 1 and self.topic_counter > 1)) + ("<div>\n" * (count == 1)) + "<section>\n"
         
         isMainTopic = count == 1
         if isMainTopic:
-            code = '''<div class="d-flex  title-transition">\n
-<h3 class="text-uppercase mr-auto" id="{id}">{}</h3>\n
-<a class="nav-link " data-toggle="modal" href="#exampleModal"><i class="fas fa-phone-square"></i></a>\n
-</div>\n'''.format(z,id=id_name)
+            code = \
+'''
+<div class="d-flex  title-transition"  id="{id}">
+    <h3 class="text-uppercase mr-auto">{}</h3>
+    <a class="nav-link " data-toggle="modal" href="#exampleModal"><i class="material-icons">contact_mail</i></a>
+</div>\n
+'''.format(z,id=id_name)
         else:
-            code = '''
-<div class="subtitle-transition">\n
-<h{c} class="text-uppercase" id="{id}">{}</h{c}>\n
-</div>\n'''.format(z,id=id_name,c=4)
+            code = \
+'''
+<div class="subtitle-transition" style="margin: 20px {v_margin}%">
+<h{c} class="text-uppercase" id="{id}">{}</h{c}>
+</div>\n
+'''.format(z,id=id_name,c=2 + count, v_margin=14 + 2 * count)
         h = extra + code
 
         self.shouldEndSection = True
@@ -102,16 +107,17 @@ class PageTranslator:
     def translate(self):
         files = self.__getLinks()
         for filename in files:
+            ffname = filename.split("\\")[-1]
             with open(filename, "r") as f:
-                print(f"Translating from: {filename}")
+                print(f"Translating: {ffname}")
                 try:
                     data = f.read().split('\n')
                 except UnicodeDecodeError as e:
                     print(f"Error at file {filename} | from: {e.start} to: {e.end}")
                     raise e
                 code = self.begin + "\n".join(self.__hash(l) for l in data if l) + ('<hr width="60%">\n</section>\n</div>\n' * self.shouldEndSection) + self.end
-            to_path = self.to_f + ((filename.split("\\")[-1]).split(".")[0] + ".html")
-            print(f"Translated to: {to_path}")
+            to_path = self.to_f + ((ffname).split(".")[0] + ".html")
+            
             with open(to_path, "w+") as f:
                 f.write(code)
             self.topic_counter = 0
