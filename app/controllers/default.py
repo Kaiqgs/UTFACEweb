@@ -15,39 +15,32 @@ gradeChoices = [        ('1º Ano','1º Ano'),
                         ('9º Ano','9º Ano'),
                         ('1º Ensino Med.','1º Ensino Med.'),
                         ('2º Ensino Med.','2º Ensino Med.'),
-                        ('3º Ensino Med.','3º Ensino Med.')]
+                        ('3º Ensino Med.','3º Ensino Med.')][::-1]
 
 
 @app.route("/", methods=["GET","POST"])
 @app.route("/home", methods=["GET","POST"])
 def home():
-    cnt = Contact()
-    cnt.grade.choices = gradeChoices
-    contactValidate(cnt)
-    return render_template("index.html", notActive = True, form = cnt)
+    return contactValidateRender(template_name_or_list = "index.html", sideBarActive = False)
+
 
 @app.route("/boas-praticas", methods=["GET","POST"])
 def praticas():
-    cnt = Contact()
-    cnt.grade.choices = gradeChoices
-    contactValidate(cnt)
-    return render_template("praticas.html", notActive = True, form = cnt)
+    return contactValidateRender(template_name_or_list = "praticas.html", sideBarActive = True)
+    
 
 @app.route("/ferramentas-consumo", methods=["GET","POST"])
 def consumo():
-    cnt = Contact()
-    cnt.grade.choices = gradeChoices
-    contactValidate(cnt)
-    return render_template("consumo.html", notActive = True, form = cnt)
+    return contactValidateRender(template_name_or_list = "consumo.html", sideBarActive = True)
 
 @app.route("/ferramentas-criacao", methods=["GET","POST"])
 def criacao():
+    return contactValidateRender(template_name_or_list = "criacao.html", sideBarActive = True)
+
+def contactValidateRender(**kwargs):
     cnt = Contact()
     cnt.grade.choices = gradeChoices
-    contactValidate(cnt)
-    return render_template("criacao.html", notActive = True, form = cnt)
-
-def contactValidate(cnt):
+    kwargs["form"] = cnt
     if cnt.validate_on_submit():
         contact = tbs.Contact(email=cnt.email.data,
                     name=cnt.name.data,
@@ -58,5 +51,7 @@ def contactValidate(cnt):
         db.session.add(contact)
         db.session.commit()
         print("Added")
+        return redirect("home")
     else:
         print("Not added")
+        return render_template(**kwargs)

@@ -23,11 +23,17 @@
   <link href="{{ url_for('static', filename='css/freelancer.min.css') }}" rel="stylesheet">
   <link href="{{ url_for('static', filename='css/sidebar.css') }}" rel="stylesheet">
   <link href="{{ url_for('static', filename='css/utface.css') }}" rel="stylesheet">
+  
+  <!-- jQuery CDN - Slim version (=without AJAX) -->
+  <script src="{{ url_for('static',filename='vendor/jquery/jquery.min.js') }}"></script>
+  <script src="{{ url_for('static',filename='js/utface.js') }}"></script>
 </head>
 
 <body>
   <div class="wrapper">
     <!-- Sidebar Holder -->
+    {% if sideBarActive %}
+    
     <nav id="sidebar" class="{{ 'active' if notActive else '' }}  fixed-menu">
       <div class="sidebar-header text-uppercase">
         <h3>Guia de Página</h3>
@@ -35,17 +41,20 @@
       <ul class="list-unstyled components" id="pageGuide">
       </ul>
     </nav>
+    {% endif %}
 
     <div id="content">
 
-
+      
       <nav class="navbar navbar-expand-lg bg-secondary navbar-light sticky-top fixed-top text-uppercase" id="mainNav">
         <div class="container navbar-header">
+          {% if sideBarActive %}
           <button type="button" id="sidebarCollapse" class="navbar-btn js-scroll-trigger {{'active' if notActive else ''}}">
               <span></span>
               <span></span>
               <span></span>
           </button>
+          {% endif %}
           <a class="navbar-brand" href="{{ url_for('home') }}">UTFACE_web</a>
 
           <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -67,23 +76,24 @@
                 <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{url_for('praticas')}}">Boas Práticas</a>
               </li>
               <li class="nav-item mx-0 mx-lg-1">
-                <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger d-flex align-items-center" data-toggle="modal" href="#exampleModal">Contato &nbsp;<i class="material-icons">contact_mail</i></a>
+                <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger d-flex align-items-center" onclick="javascript:openModalContact('navbar')" href="javascript:void(0);">Contato &nbsp;<i class="material-icons">contact_mail</i></a>
               </li>
             </ul>
           </div>
         </div>
       </nav>
+      
 
-      <div class="modal fade text-dark" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade text-dark" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h3 class="modal-title" id="exampleModalLabel">Fale Conosco</h5>
+              <h3 class="modal-title" id="contactModalLabel">Fale Conosco</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <form method="POST">
+            <form method="POST" id="contactForm">
               <div class="modal-body h4">
                 {{form.csrf_token}}
                 <div class="form-group">
@@ -123,23 +133,11 @@
     </div>
   </div>
 
-  <!-- jQuery CDN - Slim version (=without AJAX) -->
-  <script src="{{ url_for('static',filename='vendor/jquery/jquery.slim.min.js') }}"></script>
   <!-- Popper.JS -->
   <script src="{{ url_for('static',filename='js/popper.min.js') }}"></script>
   <!-- Bootstrap JS -->
   <script src="{{ url_for('static',filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
-  <script src="{{ url_for('static',filename='js/utface.js') }}"></script>
-
-  <script type="text/javascript">
-    $(document).ready(function() {
-      $('#sidebarCollapse').on('click', function() {
-        $('#sidebar').toggleClass('active');
-        $(this).toggleClass('active');
-      });
-    });
-  </script>
 </body>
 
 

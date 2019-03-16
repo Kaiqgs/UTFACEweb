@@ -11,7 +11,7 @@ O Duolingo é uma plataforma web e mobile que te disponibiliza diversos cursos d
 Para você que está começando na plataforma é recomendável começar com um ritmo mais devagar e contínuo, é melhor fazer cinco minutos por dia do que uma hora por mês, a própria plataforma foi planejada para te recomendar lições diárias onde você segue uma meta a qual você decide a que deseja seguir.
 
 
-**imagem duolingo**
+<img src="{{url_for('static',filename='img/content/duolingo_logo.png')}}" class="mx-auto d-block w-25">
 
 
 É uma plataforma web e mobile que disponibiliza cursos de inglês com a proposta de aprender um pouco a cada dia. A plataforma tem cursos 100% em português para Alemão, Espanhol, Francês, Italiano e Esperanto. A aprendizagem é feita por meio de exercícios escritos, de leitura, de escuta e de pronúncia.
@@ -29,7 +29,7 @@ A Khan academy é uma empresa sem fins lucrativos que disponibiliza cursos onlin
 
 A maioria dos cursos dispõem de vídeos e exercícios para que você aprenda mais facilmente o conteúdo proposto.
 
-**imagem khan**
+<img src="{{url_for('static',filename='img/content/khanacademy_logo.png')}}" class="mx-auto d-block w-25">
 
 A plataforma oferece também ferramentas para que pais e professores possam acompanhar o desenvolvimento dos filhos e alunos de forma eficiente. Uma das facilidades oferecidas pela ferramenta são os cursos separados por anos, onde podem encontrar facilmente os temas mas adequados à sua idade, por exemplo um aluno do primeiro ano pode se sentir mais avontade vendo materiais que viu ou irá ver um pouco mais adiante na sala de aula.
 
@@ -48,7 +48,7 @@ Desde livros grátis à notícias. Na internet você pode ler de tudo, com acess
 Link para o Wikipédia: 🔗<a href="https://www.wikipedia.org/" target="_blank">aqui</a>
 A wikipédia é um dos sites mais conhecidos atualmente, quando se pesquisa sobre algo é comum encontrar uma das páginas da wikipédia dando uma visão geral sobre o assunto e dando uma luz temas que não nos são familiares tudo isso de forma gratuita. Porém um recurso que muitos usuários que utilizam este web site  não conhecem é o mecanismo que o tornou um diferencial e ao mesmo tempo faz com que deva-se ter cautela com seu conteúdo, a possibilidade de que todos os usuários criem e editem artigos. 
 
-**imagem wikipedia**
+<img src="{{url_for('static',filename='img/content/wikipedia_logo.png')}}" class="mx-auto d-block w-25">
 
 Esta característica foi o que a popularizou, pois todos que sabem algo de alguma área podem compartilhar seu conhecimento para que o próximo que entre naquela página tenha acesso também a essa informação o que possibilitou que crescesse de forma extraordinária e passasse de mais de 1 milhão de artigos só em português.
 
@@ -67,7 +67,7 @@ Youtube, um dos sites mais consumidos do Brasil que se tornou parte importante d
 
 Um exemplo desta incrível variedade pode ser demonstrada com a pesquisa de uma conta muito comum como "como fazer regra de 3" (imagem abaixo). Para a mesma pesquisa apareceram inúmeros vídeos de criadores de conteúdo diferentes que muitas vezes terão abordagens para o mesmo tema diferentes. 
 
-**Imagem youtube**
+<img src="{{url_for('static',filename='img/content/youtube_logo.png')}}" class="mx-auto d-block w-25">
 
 Além de vídeo aula pode-se encontrar também palestras, experimentos, debates e muitas outras coisas úteis no desenvolvimento educacional. Claro que uma ferramenta tão grande pode-se encontrar materiais incorretos ou indesejados por isso é importante conhecer o maior número de criadores de conteúdo de qualidade para que se possa tirar o máximo de proveito do poder desta ferramenta. Alguns canais incrivelmente bom em suas respectivas áreas são:
 

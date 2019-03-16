@@ -5,7 +5,21 @@ arrangeGuide = function(){
   for(let i = 0; i < titles.length; ++i){
       var li = document.createElement("li");
       var a = document.createElement("a");
-      a.href = "#" + titles[i].id;
+
+      var h = $(document).height();
+      var w = $(document).width();
+
+      $(a).click(function(){
+        $('html, body').animate({
+          scrollTop: $("#"+ titles[i].id).offset().top - (h * .05 - (w/(w*.5)))
+        }, 1000);
+      });
+
+      $(a).hover(function(){
+        $(this).css('cursor','pointer');
+      });
+
+      //a.href = void(0); 
       a.innerHTML = titles[i].getElementsByTagName("h3")[0].innerText;
        li.appendChild(a);
        guide.appendChild(li);
@@ -13,20 +27,21 @@ arrangeGuide = function(){
 }
 
 
-loadContact = function(obj){
-  var xmlHttp = new XMLHttpRequest();
-  xmlHttp.onreadystatechange = function() {
-      if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-          obj.innerHTML = xmlHttp.responseText;
-  }
-  xmlHttp.open("GET", "/contato", true); // true for asynchronous
-  xmlHttp.send(null);
+openModalContact = function(source){
+  source = window.location.href + " ; " + source
+  $("#contact-source").val(source);
+  $("#contactModal").modal("show");
 }
 
-initContact = function(){
-  var contObjs = document.getElementsByClassName("loadContact");
-  for(let i = 0 ; i < contObjs.length; ++i)loadContact(contObjs[i]);
-}
+$(document).ready(function() {
+  $('#sidebarCollapse').on('click', function() {
+    $('#sidebar').toggleClass('active');
+    $(this).toggleClass('active');
+  });
 
-initContact();
-arrangeGuide();
+
+  arrangeGuide();
+});
+
+
+

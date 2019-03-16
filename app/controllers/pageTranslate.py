@@ -1,6 +1,6 @@
 import glob
 from enum import Enum
-
+import string
 import unidecode
 
 
@@ -12,7 +12,7 @@ class PageTranslator:
         
         def parse(self,x):
             self.func(x)
-
+   
 
     def __init__(self, 
                 from_f: str, 
@@ -21,7 +21,8 @@ class PageTranslator:
         self.from_f = from_f
         self.to_f = to_f
         self.extension = extension
-        
+        self.printable = set(string.printable)
+
         self.begin = "{% extends 'base.html' %}\n{% block content %}\n"
         self.end = "\n</div>\n{% endblock %}"
         
@@ -43,6 +44,8 @@ class PageTranslator:
                                 "**_else_**": self._else,
                             }
         self.shouldEndSection = False
+    def remove_funny_chars(self,s):
+        return "".join(filter(lambda x: x in self.printable,s))
 
     def _else(self, x):
         if "<br>" in x:
@@ -69,7 +72,7 @@ class PageTranslator:
         if(count == 0): return ""
         self.incrementTopic(count)
         
-        id_name = "".join( c for c in unidecode.unidecode(z.lower()) if c.isalpha() ) + "-t"
+        id_name = "-".join(self.remove_funny_chars(z.lower()).split() + ["t"])
         #z = self.topic_div + z
         
         extra = ('<hr width="60%">\n</section>\n' * (self.sub_counter > 0 or self.topic_counter > 1 )) +('</div>\n' * (count == 1 and self.topic_counter > 1)) + ('<div class="text-body">\n' * (count == 1)) + \
@@ -79,11 +82,11 @@ class PageTranslator:
         if isMainTopic:
             code = \
 '''
-<div class="d-flex  title-transition"  id="{id}">
+<div class="d-flex  title-transition user-contact-utface"  id="{id}">
     <h3 class="text-uppercase mr-auto">{}</h3>
-    <a class="nav-link " data-toggle="modal" href="#exampleModal"><i class="material-icons">contact_mail</i></a>
+    <a class="nav-link " onclick="openModalContact('{src}');" href="javascript:void(0);"><i class="material-icons">contact_mail</i></a>
 </div>\n
-'''.format(z,id=id_name)
+'''.format(z,id=id_name, src=id_name)
         else:
             code = \
 '''

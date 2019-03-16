@@ -8,4 +8,4 @@ class Contact(FlaskForm):
     age = IntegerField('age',validators=[DataRequired()])
     grade = SelectField('grade',validators=[DataRequired()],coerce=str)
     message = TextAreaField('message', validators=[DataRequired()])
-    source = HiddenField('source', default="NAVBAR")
+    source = HiddenField('source', default="NAVBAR", id="contact-source")
