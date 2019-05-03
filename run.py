@@ -1,60 +1,25 @@
-from app import manager, app
-from flask_script import Command
+from app import manager
+from flask_script import  Command, Option
 
 class GunicornServer(Command):
-	description = 'to run the app within Gunicorn'
+    """Run the app within Gunicorn"""
 
-	def __init__(self, host='0.0.0.0', port=5000, workers=2):
-	    self.port = port
-	    self.host = host
-	    self.workers = workers
+    def get_options(self):
+        from gunicorn.config import make_settings
 
-	def get_options(self):
-	    return (
-	        Option('-H', '--host',
-	               dest='host',
-	               default=self.host),
+        settings = make_settings()
+        options = (
+            Option(*klass.cli, action=klass.action)
+            for setting, klass in settings.iteritems() if klass.cli
+        )
+        return options
 
-	        Option('-p', '--port',
-	               dest='port',
-	               type=int,
-	               default=self.port),
+    def run(self, *args, **kwargs):
+        from gunicorn.app.wsgiapp import WSGIApplication
 
-	        Option('-w', '--workers',
-	               dest='workers',
-	               type=int,
-	               default=self.workers),
-	    )
+        app = WSGIApplication()
+        app.app_uri = 'manage:app'
+        return app.run()
 
-	def handle(self, app, host, port, workers):
-
-	    from gunicorn import version_info
-	    if version_info < (0, 9, 0):
-	        from gunicorn.arbiter import Arbiter
-	        from gunicorn.config import Config
-	        arbiter = Arbiter(
-	            Config(
-	                {'bind': "%s:%d" % (host, int(port)), 'workers': workers}
-	            ),
-	            app
-	        )
-	        arbiter.run()
-	    else:
-	        from gunicorn.app.base import Application
-
-	        class FlaskApplication(Application):
-	            def init(self, parser, opts, args):
-	                return {
-	                    'bind': '{0}:{1}'.format(host, port),
-	                    'workers': workers
-	                }
-
-	            def load(self):
-	                return app
-
-	        FlaskApplication().run()
-
-
-
-#Adding gunicorn based runserver command
 manager.add_command("gunicorn", GunicornServer())
+manager.run()
