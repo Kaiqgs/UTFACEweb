@@ -51,7 +51,7 @@ a, a:hover, a:focus {
     position: sticky; will check*/
 
     max-width: 250px;
-    margin-top: 30%;
+    margin-top: 20%;
     background-color: #2c3e50b0;
     transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
     transform-origin: bottom left;
