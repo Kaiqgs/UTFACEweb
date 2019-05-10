@@ -1,6 +1,6 @@
-import app
+from app import flask_app
 def start():
-	app.flask_app.run()
+	flask_app.run()
 
 
 if __name__ == '__main__':
