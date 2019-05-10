@@ -7,14 +7,14 @@ import os
 
 root = os.path.dirname(__file__)
 
-app = Flask(__name__)
+flask_app = Flask(__name__)
 
-app.config.from_object('config')
-db = SQLAlchemy(app)
+flask_app.config.from_object('config')
+db = SQLAlchemy(flask_app)
 
-migrate = Migrate(app,db)
+migrate = Migrate(flask_app,db)
 
-manager = Manager(app)
+manager = Manager(flask_app)
 
 manager.add_command('db',MigrateCommand)
 

@@ -1,5 +1,5 @@
 import datetime
-from app import app, resp,db
+from app import flask_app, resp,db
 from flask import render_template,flash,redirect,url_for
 from app.models.forms import Contact
 import app.models.tables as tbs
@@ -18,22 +18,22 @@ gradeChoices = [        ('1º Ano','1º Ano'),
                         ('3º Ensino Med.','3º Ensino Med.')][::-1]
 
 
-@app.route("/", methods=["GET","POST"])
-@app.route("/home", methods=["GET","POST"])
+@flask_app.route("/", methods=["GET","POST"])
+@flask_app.route("/home", methods=["GET","POST"])
 def home():
     return contactValidateRender(template_name_or_list = "index.html", sideBarActive = False)
 
 
-@app.route("/boas-praticas", methods=["GET","POST"])
+@flask_app.route("/boas-praticas", methods=["GET","POST"])
 def praticas():
     return contactValidateRender(template_name_or_list = "praticas.html", sideBarActive = True)
     
 
-@app.route("/ferramentas-consumo", methods=["GET","POST"])
+@flask_app.route("/ferramentas-consumo", methods=["GET","POST"])
 def consumo():
     return contactValidateRender(template_name_or_list = "consumo.html", sideBarActive = True)
 
-@app.route("/ferramentas-criacao", methods=["GET","POST"])
+@flask_app.route("/ferramentas-criacao", methods=["GET","POST"])
 def criacao():
     return contactValidateRender(template_name_or_list = "criacao.html", sideBarActive = True)
 

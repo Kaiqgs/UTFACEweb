@@ -1,7 +1,7 @@
-from app import manager, app
-
+import app
 def start():
-	manager.run()
+	app.flask_app.run()
+
 
 if __name__ == '__main__':
     start()
