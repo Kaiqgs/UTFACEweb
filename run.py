@@ -1,4 +1,7 @@
 from app import manager, app
 
-if __name__ == '__main__':
+def start():
 	manager.run()
+
+if __name__ == '__main__':
+    start()
