@@ -50,8 +50,7 @@ def contactValidateRender(**kwargs):
                     source = cnt.source.data)
         db.session.add(contact)
         db.session.commit()
-        print("Added")
+        print(f"New contact made: {cnt.name.data} was added.")
         return redirect("home")
     else:
-        print("Not added")
         return render_template(**kwargs)
